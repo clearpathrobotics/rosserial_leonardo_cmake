@@ -1,0 +1,7 @@
+#!/bin/bash
+
+AVRDUDE_CONF=$(catkin_find rosserial_leonardo_cmake avrdude.conf)
+HEX_FILE=$(catkin_find $1 $2)
+
+rosrun rosserial_leonardo_cmake enter_bootloader /dev/arduino
+rosrun rosserial_leonardo_cmake avrdude -C${AVRDUDE_CONF} -patmega32u4 -cavr109 -b57600 -P/dev/arduino -D -V -Uflash:w:${HEX_FILE}

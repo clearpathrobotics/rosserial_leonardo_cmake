@@ -1,0 +1,6 @@
+#!/usr/bin/python
+
+import serial, sys, time
+
+serial.Serial(sys.argv[1], 1200).close()
+time.sleep(2.0)
