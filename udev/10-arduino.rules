@@ -1,0 +1,5 @@
+# Bootloader ID
+ATTRS{product}=="AVR*", SYMLINK+="arduino", MODE="0666"
+
+# Firmware ID
+SUBSYSTEM=="tty", ATTRS{product}=="Arduino*", SYMLINK+="arduino", MODE="0666"
