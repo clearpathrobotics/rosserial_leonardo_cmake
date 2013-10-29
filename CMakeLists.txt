@@ -9,10 +9,8 @@ set(ARDUINO_VERSION "1.0.5")
 
 if( CMAKE_SIZEOF_VOID_P EQUAL 8 )
   set(ARDUINO_DOWNLOAD "arduino-${ARDUINO_VERSION}-linux64.tgz")
-  set(AVRDUDE_BIN avrdude64)
 else( CMAKE_SIZEOF_VOID_P EQUAL 8 )
   set(ARDUINO_DOWNLOAD "arduino-${ARDUINO_VERSION}-linux32.tgz")
-  set(AVRDUDE_BIN avrdude)
 endif( CMAKE_SIZEOF_VOID_P EQUAL 8 )
 
 # Download and unzip the Arduino tarball.
@@ -36,7 +34,7 @@ add_custom_command(
   DEPENDS ${PROJECT_BINARY_DIR}/arduino-${ARDUINO_VERSION}
   OUTPUT ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_BIN_DESTINATION}/avrdude
   COMMAND mkdir -p ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_BIN_DESTINATION}
-  COMMAND cp ${PROJECT_BINARY_DIR}/arduino-${ARDUINO_VERSION}/hardware/tools/${AVRDUDE_BIN}
+  COMMAND cp ${PROJECT_BINARY_DIR}/arduino-${ARDUINO_VERSION}/hardware/tools/avrdude
              ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_BIN_DESTINATION}/avrdude
 )
 
