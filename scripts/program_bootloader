@@ -1,11 +1,9 @@
 #!/bin/bash
 
-AVRDUDE=$(catkin_find rosserial_leonardo_cmake avrdude)
-AVRDUDE_CONFIG=$(catkin_find --share rosserial_leonardo_cmake avrdude.conf)
 BOOTLOADER_HEX=$(catkin_find --share rosserial_leonardo_cmake bootloader/Caterina-Leonardo.hex)
-AVRDUDE_FLAGS="-C ${AVRDUDE_CONFIG} -p m32u4 -P usb -c avrispmkii"
+AVRDUDE_FLAGS="-p m32u4 -P usb -c avrispmkii"
 
-sudo $AVRDUDE $AVRDUDE_FLAGS -e
-sudo $AVRDUDE $AVRDUDE_FLAGS -U lfuse:w:0xFC:m -U hfuse:w:0xD0:m -U efuse:w:0xC3:m 
-sudo $AVRDUDE $AVRDUDE_FLAGS -B 1 -U flash:w:$BOOTLOADER_HEX
-sudo $AVRDUDE $AVRDUDE_FLAGS -U lock:w:0x2F:m
+sudo avrdude $AVRDUDE_FLAGS -e
+sudo avrdude $AVRDUDE_FLAGS -U lfuse:w:0xFC:m -U hfuse:w:0xD0:m -U efuse:w:0xC3:m 
+sudo avrdude $AVRDUDE_FLAGS -B 1 -U flash:w:$BOOTLOADER_HEX
+sudo avrdude $AVRDUDE_FLAGS -U lock:w:0x2F:m

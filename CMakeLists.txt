@@ -34,7 +34,7 @@ add_custom_target(${PROJECT_NAME}
   DEPENDS ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_SHARE_DESTINATION}/arduino-${ARDUINO_VERSION} 
 )
 
-# Install shared resources.
+# Install shared resources, including the sources extracted from the Arduino tarball.
 install(DIRECTORY
   ${PROJECT_SOURCE_DIR}/cmake
   ${PROJECT_SOURCE_DIR}/arduino-cmake
