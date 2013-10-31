@@ -25,36 +25,29 @@ function(rosserial_leonardo_firmware FIRMWARE)
     COMMAND cp ${PROJECT_SOURCE_DIR}/${FIRMWARE}/ros_lib/* ${PROJECT_BINARY_DIR}/${FIRMWARE}/ros_lib/
   )
 
+  # Create a target for the ros_lib generation, since we need to depend on specific
+  # message packages being built for that.
   add_custom_target(${PROJECT_NAME}_${FIRMWARE}_ros_lib DEPENDS ${PROJECT_BINARY_DIR}/${FIRMWARE}/ros_lib)
-
-  # Add more message-build dependencies if your firmware requires messages.
   add_dependencies(${PROJECT_NAME}_${FIRMWARE}_ros_lib rosserial_msgs_genpy std_msgs_genpy)
 
   # Generate a call to CMake inside the firmware subdirectory (firmware itself is generated outside of catkin).
   execute_process(COMMAND catkin_find rosserial_leonardo_cmake arduino-cmake/ArduinoToolchain.cmake --first-only
     OUTPUT_VARIABLE ARDUINO_TOOLCHAIN)
   add_custom_command(
+    OUTPUT ${PROJECT_BINARY_DIR}/${FIRMWARE}/CMakeCache.txt
     DEPENDS ${PROJECT_BINARY_DIR}/arduino-${ARDUINO_VERSION}
-            ${PROJECT_BINARY_DIR}/${FIRMWARE}/ros_lib
-    OUTPUT ${PROJECT_BINARY_DIR}/${FIRMWARE}/${FIRMWARE}.hex
     WORKING_DIRECTORY ${PROJECT_BINARY_DIR}/${FIRMWARE}
     COMMAND ${CMAKE_COMMAND} ${PROJECT_SOURCE_DIR}/${FIRMWARE}
         -DARDUINO_SDK_PATH=${PROJECT_BINARY_DIR}/arduino-${ARDUINO_VERSION}
         -DCMAKE_TOOLCHAIN_FILE=${ARDUINO_TOOLCHAIN}
-    COMMAND make
   )
-
-  # Copy generated firmware from build space to devel space.
-  add_custom_command(
-    DEPENDS ${PROJECT_BINARY_DIR}/${FIRMWARE}/${FIRMWARE}.hex
-    OUTPUT ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_SHARE_DESTINATION}/${FIRMWARE}.hex
-    COMMAND mkdir -p ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_SHARE_DESTINATION}
-    COMMAND cp ${PROJECT_BINARY_DIR}/${FIRMWARE}/${FIRMWARE}.hex
-        ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_SHARE_DESTINATION}/${FIRMWARE}.hex
-  )
-
-  add_custom_target(${PROJECT_NAME}_${FIRMWARE} ALL DEPENDS 
-    ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_SHARE_DESTINATION}/${FIRMWARE}.hex
+  add_custom_target(${PROJECT_NAME}_${FIRMWARE} ALL make
+    DEPENDS ${PROJECT_BINARY_DIR}/${FIRMWARE}/CMakeCache.txt
+    WORKING_DIRECTORY ${PROJECT_BINARY_DIR}/${FIRMWARE}
+    # Unfortunately, this manual copy is necessary, as the Arduino toolchain doesn't appear to
+    # respect the EXECUTABLE_OUTPUT_PATH variable.
+    COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_BINARY_DIR}/${FIRMWARE}/${FIRMWARE}.hex 
+                                     ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_SHARE_DESTINATION}/
   )
   add_dependencies(${PROJECT_NAME}_${FIRMWARE} ${PROJECT_NAME}_${FIRMWARE}_ros_lib)
 
