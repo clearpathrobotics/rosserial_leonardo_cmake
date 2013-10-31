@@ -10,14 +10,6 @@ endif( CMAKE_SIZEOF_VOID_P EQUAL 8 )
 function(rosserial_leonardo_firmware FIRMWARE)
   file(MAKE_DIRECTORY ${PROJECT_BINARY_DIR}/${FIRMWARE})
 
-  # Download and unzip the Arduino headers.
-  add_custom_command(
-    OUTPUT ${PROJECT_BINARY_DIR}/arduino-${ARDUINO_VERSION}
-    WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
-    COMMAND wget http://arduino.googlecode.com/files/${ARDUINO_DOWNLOAD}
-    COMMAND tar xzf ${ARDUINO_DOWNLOAD}
-  )
-
   # Generate the rosserial messages and ros_lib code
   add_custom_command(
     OUTPUT ${PROJECT_BINARY_DIR}/${FIRMWARE}/ros_lib
@@ -35,10 +27,8 @@ function(rosserial_leonardo_firmware FIRMWARE)
     OUTPUT_VARIABLE ARDUINO_TOOLCHAIN)
   add_custom_command(
     OUTPUT ${PROJECT_BINARY_DIR}/${FIRMWARE}/CMakeCache.txt
-    DEPENDS ${PROJECT_BINARY_DIR}/arduino-${ARDUINO_VERSION}
     WORKING_DIRECTORY ${PROJECT_BINARY_DIR}/${FIRMWARE}
     COMMAND ${CMAKE_COMMAND} ${PROJECT_SOURCE_DIR}/${FIRMWARE}
-        -DARDUINO_SDK_PATH=${PROJECT_BINARY_DIR}/arduino-${ARDUINO_VERSION}
         -DCMAKE_TOOLCHAIN_FILE=${ARDUINO_TOOLCHAIN}
   )
   add_custom_target(${PROJECT_NAME}_${FIRMWARE} ALL make
@@ -49,7 +39,7 @@ function(rosserial_leonardo_firmware FIRMWARE)
     COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_BINARY_DIR}/${FIRMWARE}/${FIRMWARE}.hex 
                                      ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_SHARE_DESTINATION}/
   )
-  add_dependencies(${PROJECT_NAME}_${FIRMWARE} ${PROJECT_NAME}_${FIRMWARE}_ros_lib)
+  add_dependencies(${PROJECT_NAME}_${FIRMWARE} ${PROJECT_NAME}_${FIRMWARE}_ros_lib rosserial_leonardo_cmake)
 
   # Generate a target for the upload command, so that is accessible from catkin_make.
   add_custom_target(
