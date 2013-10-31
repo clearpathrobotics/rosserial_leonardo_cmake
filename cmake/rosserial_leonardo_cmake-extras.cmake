@@ -44,7 +44,7 @@ function(rosserial_leonardo_firmware FIRMWARE)
   # Generate a target for the upload command, so that is accessible from catkin_make.
   add_custom_target(
     ${PROJECT_NAME}_${FIRMWARE}_upload
-    COMMAND rosrun rosserial_arduino_cmake upload ${PROJECT_NAME} ${FIRMWARE}.hex
+    COMMAND rosrun rosserial_leonardo_cmake upload ${PROJECT_NAME} ${FIRMWARE}.hex
   )
   add_dependencies(${PROJECT_NAME}_${FIRMWARE}_upload ${PROJECT_NAME}_${FIRMWARE})
 
