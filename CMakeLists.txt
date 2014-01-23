@@ -2,8 +2,10 @@ cmake_minimum_required(VERSION 2.8.3)
 
 project(rosserial_leonardo_cmake)
 
-find_package(catkin REQUIRED COMPONENTS rosserial_msgs)
-catkin_package(CFG_EXTRAS rosserial_leonardo_cmake-extras.cmake)
+find_package(catkin REQUIRED COMPONENTS rosserial_msgs rosserial_arduino)
+catkin_package(
+  CATKIN_DEPENDS rosserial_arduino
+  CFG_EXTRAS rosserial_leonardo_cmake-extras.cmake)
 
 set(ARDUINO_VERSION "1.0.5")
 
@@ -29,8 +31,8 @@ add_custom_command(
                                       --exclude=arduino-${ARDUINO_VERSION}/hardware/tools
 )
 
-# Target to make this stuff happen. Firmwares depend on this, which triggers it to occur.
-add_custom_target(${PROJECT_NAME}
+# Target to make this stuff happen. Firmwares depend on this.
+add_custom_target(${PROJECT_NAME} ALL
   DEPENDS ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_SHARE_DESTINATION}/arduino-${ARDUINO_VERSION} 
 )
 

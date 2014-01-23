@@ -14,4 +14,5 @@
   <build_depend>gcc-avr</build_depend>
   <build_depend>avr-libc</build_depend>
   <build_depend>avrdude</build_depend>
+  <run_depend>rosserial_arduino</run_depend>
 </package>
