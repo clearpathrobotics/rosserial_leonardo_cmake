@@ -11,8 +11,8 @@
   <build_depend>std_msgs</build_depend>
   <build_depend>rosserial_msgs</build_depend>
   <build_depend>rosserial_arduino</build_depend>
-  <build_depend>gcc-avr</build_depend>
-  <build_depend>avr-libc</build_depend>
-  <build_depend>avrdude</build_depend>
+  <run_depend>gcc-avr</run_depend>
+  <run_depend>avr-libc</run_depend>
+  <run_depend>avrdude</run_depend>
   <run_depend>rosserial_arduino</run_depend>
 </package>
