@@ -2,6 +2,11 @@
 Changelog for package rosserial_leonardo_cmake
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Specify build-time rosdeps properly, switch wget -> curl.
+* Contributors: Mike Purvis
+
 0.1.0 (2014-07-21)
 ------------------
 * Initial release to ros-public.
