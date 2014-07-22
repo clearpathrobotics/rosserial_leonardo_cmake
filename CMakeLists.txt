@@ -19,7 +19,7 @@ endif( CMAKE_SIZEOF_VOID_P EQUAL 8 )
 add_custom_command(
   OUTPUT ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_SHARE_DESTINATION}/arduino-${ARDUINO_VERSION}
   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
-  COMMAND wget http://arduino.googlecode.com/files/${ARDUINO_DOWNLOAD} 
+  COMMAND curl -O http://arduino.googlecode.com/files/${ARDUINO_DOWNLOAD} 
   COMMAND tar xzf ${ARDUINO_DOWNLOAD} -C ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_SHARE_DESTINATION}
                                       --exclude=reference
                                       --exclude=examples
