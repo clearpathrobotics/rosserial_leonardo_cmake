@@ -2,9 +2,8 @@ cmake_minimum_required(VERSION 2.8.3)
 
 project(rosserial_leonardo_cmake)
 
-find_package(catkin REQUIRED COMPONENTS rosserial_msgs rosserial_arduino)
+find_package(catkin REQUIRED)
 catkin_package(
-  CATKIN_DEPENDS rosserial_arduino
   CFG_EXTRAS rosserial_leonardo_cmake-extras.cmake)
 
 set(ARDUINO_VERSION "1.0.5")
