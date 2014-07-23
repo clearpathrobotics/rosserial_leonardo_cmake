@@ -8,10 +8,6 @@
   <license>BSD</license>
 
   <buildtool_depend>catkin</buildtool_depend>
-  <build_depend>curl</build_depend>
-  <build_depend>std_msgs</build_depend>
-  <build_depend>rosserial_msgs</build_depend>
-  <build_depend>rosserial_arduino</build_depend>
   <build_depend>tar</build_depend>
   <run_depend>gcc-avr</run_depend>
   <run_depend>avr-libc</run_depend>
