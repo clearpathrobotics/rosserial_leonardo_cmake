@@ -2,6 +2,11 @@
 Changelog for package rosserial_leonardo_cmake
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Remove old build deps from lists file as well.
+* Contributors: Mike Purvis
+
 0.1.2 (2014-07-22)
 ------------------
 * Remove unneeded build-time dependencies.
