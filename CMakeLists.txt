@@ -16,10 +16,10 @@ else( CMAKE_SIZEOF_VOID_P EQUAL 8 )
 endif( CMAKE_SIZEOF_VOID_P EQUAL 8 )
 
 # Download and unzip the Arduino tarball.
-add_custom_command(
-  OUTPUT ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_SHARE_DESTINATION}/arduino-${ARDUINO_VERSION}
+file(DOWNLOAD http://arduino.googlecode.com/files/${ARDUINO_DOWNLOAD}
+  ${PROJECT_BINARY_DIR}/${ARDUINO_DOWNLOAD})
+execute_process(
   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
-  COMMAND curl -O http://arduino.googlecode.com/files/${ARDUINO_DOWNLOAD} 
   COMMAND tar xzf ${ARDUINO_DOWNLOAD} -C ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_SHARE_DESTINATION}
                                       --exclude=reference
                                       --exclude=examples
@@ -29,9 +29,9 @@ add_custom_command(
                                       --exclude=lib/theme
                                       --exclude=arduino-${ARDUINO_VERSION}/tools
                                       --exclude=arduino-${ARDUINO_VERSION}/hardware/tools
-)
+  )
 
-# Target to make this stuff happen. Firmwares depend on this.
+# Legacy target from when the download/untar happened at build time rather than configure time.
 add_custom_target(${PROJECT_NAME} ALL
   DEPENDS ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_SHARE_DESTINATION}/arduino-${ARDUINO_VERSION} 
 )
