@@ -2,8 +2,8 @@
 Changelog for package rosserial_leonardo_cmake
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.4 (2019-04-18)
+------------------
 * Updated arduino link from google code
 * Contributors: Dave Niewinski
 
