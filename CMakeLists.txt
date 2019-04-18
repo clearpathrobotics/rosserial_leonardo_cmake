@@ -15,7 +15,7 @@ else( CMAKE_SIZEOF_VOID_P EQUAL 8 )
 endif( CMAKE_SIZEOF_VOID_P EQUAL 8 )
 
 # Download and unzip the Arduino tarball.
-file(DOWNLOAD http://arduino.googlecode.com/files/${ARDUINO_DOWNLOAD}
+file(DOWNLOAD https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/arduino/${ARDUINO_DOWNLOAD}
   ${PROJECT_BINARY_DIR}/${ARDUINO_DOWNLOAD})
 execute_process(
   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
