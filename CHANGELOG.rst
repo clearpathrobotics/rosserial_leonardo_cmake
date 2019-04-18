@@ -2,6 +2,11 @@
 Changelog for package rosserial_leonardo_cmake
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Updated arduino link from google code
+* Contributors: Dave Niewinski
+
 0.1.3 (2014-07-23)
 ------------------
 * Remove old build deps from lists file as well.
