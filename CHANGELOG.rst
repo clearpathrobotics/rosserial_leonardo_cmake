@@ -2,8 +2,8 @@
 Changelog for package rosserial_leonardo_cmake
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.5 (2021-03-16)
+------------------
 * Update the package's license to use BSD and MPL
 * Add license file to the package with the full text of both applicable licenses
 * Contributors: Chris Iverach-Brereton
