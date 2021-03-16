@@ -2,6 +2,12 @@
 Changelog for package rosserial_leonardo_cmake
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Update the package's license to use BSD and MPL
+* Add license file to the package with the full text of both applicable licenses
+* Contributors: Chris Iverach-Brereton
+
 0.1.4 (2019-04-18)
 ------------------
 * Updated arduino link from google code
